@@ -1,0 +1,35 @@
+{
+  "name": "lsc",
+  "version": "1.0.0",
+  "description": "A structured library for managing worship song lyrics with Chinese, English, and Pinyin support.",
+  "main": "index.js",
+  "scripts": {
+    "lsc": "tsx src/cli.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "lsc": "./dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/75033us/lsc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/75033us/lsc/issues"
+  },
+  "homepage": "https://github.com/75033us/lsc#readme",
+  "dependencies": {
+    "@types/node": "^25.0.4",
+    "commander": "^14.0.2",
+    "pinyin-pro": "^3.27.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}

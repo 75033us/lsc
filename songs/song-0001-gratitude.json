@@ -1,0 +1,134 @@
+
+> lsc@1.0.0 lsc
+> tsx src/cli.ts import https://youtu.be/dQdfs5S6jyA
+
+{
+  "id": "gratitude_chosen_performance",
+  "title": {
+    "chinese": "",
+    "pinyin": "",
+    "english": "Gratitude (Chosen Performance)"
+  },
+  "sections": {
+    "V1": [
+      {
+        "chinese": "言語已不夠",
+        "pinyin": "yán yǔ yǐ bú gòu",
+        "english": "All my words fall short"
+      },
+      {
+        "chinese": "我無法述說",
+        "pinyin": "wǒ wú fǎ shù shuō",
+        "english": "I got nothing new"
+      },
+      {
+        "chinese": "對你的感謝",
+        "pinyin": "duì nǐ de gǎn xiè",
+        "english": "How could I express"
+      },
+      {
+        "chinese": "如何能形容",
+        "pinyin": "rú hé néng xíng róng",
+        "english": "All my gratitude?"
+      },
+      {
+        "chinese": "我能開始唱",
+        "pinyin": "wǒ néng kāi shǐ chàng",
+        "english": "I could sing these songs"
+      },
+      {
+        "chinese": "像平常一樣",
+        "pinyin": "xiàng píng cháng yí yàng",
+        "english": "As I often do"
+      },
+      {
+        "chinese": "但音樂會結束",
+        "pinyin": "dàn yīn lè huì jié shù",
+        "english": "But every song must end"
+      },
+      {
+        "chinese": "祢卻永遠不",
+        "pinyin": "mí què yǒng yuǎn bù",
+        "english": "And You never do"
+      },
+      {
+        "chinese": "我高舉我雙手",
+        "pinyin": "wǒ gāo jǔ wǒ shuāng shǒu",
+        "english": "So I throw up my hands"
+      },
+      {
+        "chinese": "來讚美一遍又一遍",
+        "pinyin": "lái zàn měi yí biàn yòu yí biàn",
+        "english": "And praise You again and again"
+      },
+      {
+        "chinese": "",
+        "pinyin": "",
+        "english": "Hallelujah"
+      },
+      {
+        "chinese": "雖然這並不夠",
+        "pinyin": "suī rán zhè bìng bú gòu",
+        "english": "And I know it's not much"
+      },
+      {
+        "chinese": "足以獻上能配得君王",
+        "pinyin": "zú yǐ xiàn shàng néng pèi dé jūn wáng",
+        "english": "But I've nothing else fit for a King"
+      },
+      {
+        "chinese": "",
+        "pinyin": "",
+        "english": "Hallelujah"
+      },
+      {
+        "chinese": "這是我僅有",
+        "pinyin": "zhè shì wǒ jǐn yǒu",
+        "english": "I've got one response"
+      },
+      {
+        "chinese": "不變的回應",
+        "pinyin": "bú biàn de huí yīng",
+        "english": "I've got just one move"
+      },
+      {
+        "chinese": "張開我雙臂",
+        "pinyin": "zhāng kāi wǒ shuāng bì",
+        "english": "With my arm stretched wide"
+      },
+      {
+        "chinese": "我要敬拜祢",
+        "pinyin": "wǒ yào jìng bài mí",
+        "english": "I will worship You"
+      },
+      {
+        "chinese": "揚聲歌唱",
+        "pinyin": "yáng shēng gē chàng",
+        "english": "Lift up your song"
+      },
+      {
+        "chinese": "沉睡的獅子現在就要甦醒",
+        "pinyin": "chén shuì de shī zǐ xiàn zài jiù yào sū xǐng",
+        "english": "'Cause you've got a lion inside of those lungs"
+      },
+      {
+        "chinese": "興起來讚美主",
+        "pinyin": "xīng qǐ lái zàn měi zhǔ",
+        "english": "et up and praise the Lord"
+      }
+    ]
+  },
+  "copyright": {
+    "author": "Brandon Lake",
+    "year": "",
+    "publisher": "",
+    "ccli": ""
+  },
+  "sources": [
+    {
+      "type": "youtube",
+      "url": "https://youtu.be/dQdfs5S6jyA",
+      "description": "Source video"
+    }
+  ]
+}
