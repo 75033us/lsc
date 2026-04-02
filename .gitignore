@@ -4,3 +4,4 @@ dist/
 *.db
 .DS_Store
 output/
+app/warranty/config.json
