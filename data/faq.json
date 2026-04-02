@@ -1,0 +1,32 @@
+[
+  {
+    "keywords": ["時間", "幾點", "什麼時候", "service time"],
+    "question": "主日崇拜是什麼時間？",
+    "answer": "主日崇拜每週日上午 10:00 開始，歡迎您的到來！"
+  },
+  {
+    "keywords": ["地址", "在哪", "怎麼去", "location", "address"],
+    "question": "教會在哪裡？",
+    "answer": "教會地址：台北市中正區...（請至 Google Maps 搜尋「活石靈糧堂」）"
+  },
+  {
+    "keywords": ["停車", "parking"],
+    "question": "有停車場嗎？",
+    "answer": "教會附近有公共停車場，詳細資訊請詢問同工。"
+  },
+  {
+    "keywords": ["小組", "團契", "group", "fellowship"],
+    "question": "如何加入小組？",
+    "answer": "我們有多個小組，歡迎您加入！請點選選單中的「小組」了解更多。"
+  },
+  {
+    "keywords": ["奉獻", "offering", "giving"],
+    "question": "如何奉獻？",
+    "answer": "請點選選單中的「奉獻」查看奉獻方式。"
+  },
+  {
+    "keywords": ["新朋友", "第一次", "newcomer", "new"],
+    "question": "我是第一次來，該怎麼準備？",
+    "answer": "歡迎您！不需要特別準備，穿著輕鬆來就好。崇拜約 90 分鐘，包含敬拜讚美和信息分享。到場後可以到迎新台登記，會有同工為您引導。"
+  }
+]

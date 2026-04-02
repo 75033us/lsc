@@ -1,0 +1,27 @@
+{
+  "name": {
+    "chinese": "活石靈糧堂",
+    "english": "Living Stone Church"
+  },
+  "organization": "台灣學園傳道會",
+  "address": "台北市中正區...",
+  "mapUrl": "https://maps.google.com/?q=活石靈糧堂",
+  "services": [
+    {
+      "name": "主日崇拜",
+      "day": "Sunday",
+      "time": "10:00 AM"
+    }
+  ],
+  "contact": {
+    "phone": "",
+    "email": "",
+    "website": ""
+  },
+  "beliefs": [
+    "我們相信聖經是神所默示的，是信仰與生活的最高權威。",
+    "我們相信三位一體的真神——聖父、聖子、聖靈。",
+    "我們相信耶穌基督是神的兒子，為世人的罪釘死在十字架上，第三天復活。",
+    "我們相信因信稱義，唯獨恩典，唯獨信心。"
+  ]
+}
