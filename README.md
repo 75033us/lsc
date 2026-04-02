@@ -1,236 +1,147 @@
-# LSC Worship Song Lyrics Library
+# LSC LINE Bot
 
-A structured library for managing worship song lyrics with Chinese, English, and Pinyin support.
+LINE Official Account bot for Living Stone Church (活石靈糧堂 / 台灣學園傳道會).
 
-## Features
+A church admin automation platform handling announcements, scheduling, small groups, events, registration, giving, prayer requests, staff directory, and more — all through LINE.
 
-- **Multi-language lyrics**: Each song contains Chinese, English, and Pinyin versions
-- **Unique song identification**: Every song has a unique ID for easy reference
-- **Copyright tracking**: Full copyright and source attribution for each song
-- **Worship history**: Track when songs were used in services
-- **Slide generation**: Query songs and generate slides in custom order
+## Getting Started
 
-## Song Library Structure
+### Prerequisites
 
-### Song Storage Format
+- **Node.js** >= 18
+- **LINE Official Account** with Messaging API enabled
+- **ngrok** (for local development)
 
-Songs are stored as individual JSON files in the `songs/` directory.
+### 1. Install dependencies
 
-```
-songs/
-├── song_001.json
-├── song_002.json
-└── ...
+```bash
+npm install
 ```
 
-### Song Schema
+### 2. Configure environment
 
-Each section contains an array of slides. Each slide is a self-contained unit with all three languages together (Chinese, Pinyin, English - in that order for easy verification).
-
-```json
-{
-  "id": "song_001",
-  "title": {
-    "chinese": "奇異恩典",
-    "pinyin": "Qíyì Ēndiǎn",
-    "english": "Amazing Grace"
-  },
-  "sections": {
-    "V1": [
-      {
-        "chinese": "奇異恩典，何等甘甜",
-        "pinyin": "Qíyì ēndiǎn, héděng gāntián",
-        "english": "Amazing grace, how sweet the sound"
-      },
-      {
-        "chinese": "我罪已得赦免",
-        "pinyin": "Wǒ zuì yǐ dé shèmiǎn",
-        "english": "That saved a wretch like me"
-      }
-    ],
-    "V2": [ ... ],
-    "C": [ ... ],
-    "B": [ ... ]
-  },
-  "copyright": {
-    "author": "John Newton",
-    "year": "1779",
-    "publisher": "Public Domain",
-    "ccli": "1234567"
-  },
-  "sources": [
-    {
-      "type": "youtube",
-      "url": "https://youtube.com/watch?v=...",
-      "description": "Official music video"
-    },
-    {
-      "type": "website",
-      "url": "https://example.com/lyrics",
-      "description": "Original lyrics source"
-    }
-  ]
-}
+```bash
+cp .env.example .env
 ```
 
-### Section Types
-
-| Code | Description |
-|------|-------------|
-| V1, V2, V3... | Verse 1, 2, 3, etc. |
-| C | Chorus |
-| PC | Pre-Chorus |
-| B | Bridge |
-| T | Tag |
-| E | Ending |
-| I | Intro |
-| O | Outro |
-
-## Worship History
-
-Worship history is stored in the `worship/` directory, with one JSON file per service date (e.g., `2026-01-11.json`).
+Edit `.env` with your LINE credentials:
 
 ```
-worship/
-├── 2026-01-05.json
-├── 2026-01-12.json
-└── ...
+LINE_CHANNEL_ACCESS_TOKEN=<from LINE Developers Console>
+LINE_CHANNEL_SECRET=<from LINE Developers Console>
+PORT=3000
 ```
 
-Each worship file contains the song list with sequences:
+To get these values:
+1. Go to [LINE Developers Console](https://developers.line.biz/console/)
+2. Create a **Provider** (or use existing)
+3. Create a **Messaging API** channel
+4. Under **Basic settings** → copy **Channel secret**
+5. Under **Messaging API** → issue and copy **Channel access token (long-lived)**
 
-```json
-[
-  {
-    "name": "song_001",
-    "sequence": "V1 C V2 C"
-  },
-  {
-    "name": "song_002",
-    "sequence": "V1 V2 C B"
-  }
-]
+### 3. Start the development server
+
+```bash
+npm run dev
 ```
 
-## Slide Generation
+### 4. Expose webhook via ngrok
 
-### Input Format
+In a separate terminal:
 
-The worship team provides a song list with custom section ordering:
-
-```
-song_001, V1 V2 C V3 C C
-song_015, V1 C V2 C B C E
-song_023, I V1 V2 C B C T
+```bash
+ngrok http 3000
 ```
 
-### Output Format
+Copy the `https://xxxx.ngrok-free.app` URL.
 
-The system generates a JSON array of slides. Each slide has a `template` type and content with font sizes:
+### 5. Set webhook URL in LINE
 
-- **title**: Section header slide (V1, C, B, etc.)
-- **verse**: Lyric slide with chinese (88pt), pinyin (54pt), english (40pt)
+1. Go to LINE Developers Console → your channel → **Messaging API** tab
+2. Set **Webhook URL** to: `https://xxxx.ngrok-free.app/webhook`
+3. Click **Verify** — should show success
+4. Enable **Use webhook**
+5. Disable **Auto-reply messages** in LINE Official Account Manager (under Response settings)
 
-```json
-[
-  {
-    "template": "title",
-    "content": "V1"
-  },
-  {
-    "template": "verse",
-    "content": {
-      "chinese": { "text": "奇異恩典，何等甘甜", "fontSize": 88 },
-      "pinyin": { "text": "Qíyì ēndiǎn, héděng gāntián", "fontSize": 54 },
-      "english": { "text": "Amazing grace, how sweet the sound", "fontSize": 40 }
-    }
-  },
-  {
-    "template": "verse",
-    "content": {
-      "chinese": { "text": "我罪已得赦免", "fontSize": 88 },
-      "pinyin": { "text": "Wǒ zuì yǐ dé shèmiǎn", "fontSize": 54 },
-      "english": { "text": "That saved a wretch like me", "fontSize": 40 }
-    }
-  },
-  {
-    "template": "title",
-    "content": "V2"
-  },
-  {
-    "template": "verse",
-    "content": { ... }
-  },
-  {
-    "template": "title",
-    "content": "C"
-  },
-  {
-    "template": "verse",
-    "content": { ... }
-  }
-]
+### 6. Test it
+
+Open your LINE app, add the bot as a friend (via QR code from LINE Developers Console), and send:
+
+- **「教會」** — get church info flex message
+- **「幾點」** or **「地址」** — FAQ auto-reply
+- Any other text — get the default menu guide
+
+### 7. Set up rich menu (optional)
+
+```bash
+npm run setup-rich-menu
 ```
 
-## Directory Structure
+Then upload a 2500×1686 image via LINE Official Account Manager.
+
+## Project Structure
 
 ```
 lsc/
-├── README.md
-├── CLAUDE.md           # Developer notes
-├── songs/              # Song JSON files
-│   ├── song_001.json
-│   └── ...
-├── worship/            # Worship history (one file per date)
-│   ├── 2026-01-05.json
-│   └── ...
-├── templates/          # PPTX templates for slide generation
-│   ├── lsc.pptx
-│   └── ...
-├── dev/                # Development tasks
-│   ├── task_001.md
-│   └── ...
-└── src/                # Source code (future)
-    └── ...
+├── src/
+│   ├── index.ts              # App entry, module registration
+│   ├── config.ts             # Env config
+│   ├── server.ts             # Express webhook server
+│   ├── line/
+│   │   ├── client.ts         # LINE API client
+│   │   ├── webhook.ts        # Event router → modules
+│   │   ├── richMenu.ts       # Rich menu setup
+│   │   └── messages/
+│   │       └── flex.ts       # Flex message builders
+│   └── modules/
+│       ├── types.ts          # ModuleHandler interface
+│       ├── info/handler.ts   # Church info
+│       ├── qa/handler.ts     # FAQ / fallback
+│       └── ...               # Future: schedule, groups, events, etc.
+├── data/                     # Static JSON (church info, FAQ, staff)
+├── scripts/                  # Setup scripts
+├── songs/                    # Song library (JSON)
+├── worship/                  # Worship history
+└── dev/                      # Design docs & tasks
 ```
 
-## Usage (Planned)
+## Available Scripts
 
-```bash
-# Generate slides from a worship file using a PPTX template
-./lsc generate --template templates/lsc.pptx --worship worship/2026-01-05.json > 2026-01-05.pptx
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start dev server with hot reload (tsx watch) |
+| `npm run build` | Compile TypeScript to dist/ |
+| `npm start` | Run compiled production server |
+| `npm run setup-rich-menu` | Provision LINE rich menu |
 
-# Full-text fuzzy search across all song fields
-./lsc search "Amazing Grace"
+## Module System
 
-# List all songs
-./lsc list
+Each feature is a self-contained module implementing `ModuleHandler`:
 
-# Query worship history for a song (outputs dates when song was used)
-./lsc history song_001
-
-# Import a song from URL (extracts lyrics from YouTube description, etc.)
-./lsc import "https://youtube.com/watch?v=..." > songs/song_001.json
+```typescript
+interface ModuleHandler {
+  name: string;
+  canHandle(event: WebhookEvent): boolean;
+  handle(ctx: ModuleContext): Promise<void>;
+}
 ```
 
-## Prerequisites
+Modules are registered in priority order in `src/index.ts`. First match wins.
 
-- **Node.js** >= 18
-- **yt-dlp** - Required for YouTube metadata fetching
-  ```bash
-  # macOS
-  brew install yt-dlp
-
-  # or with pip
-  pip install yt-dlp
-  ```
-
-## Contributing
-
-1. Add new songs to the `songs/` directory following the JSON schema
-2. Update worship history after each service
-3. Ensure copyright information is accurate and complete
+| Module | Trigger | Status |
+|--------|---------|--------|
+| info | "教會", postback `action=info` | ✅ |
+| qa | Any unmatched text (fallback) | ✅ |
+| schedule | "主日", postback `action=schedule` | Planned |
+| groups | "小組", postback `action=groups` | Planned |
+| events | "活動", postback `action=events` | Planned |
+| registration | "報名", postback `action=register` | Planned |
+| giving | "奉獻", postback `action=giving` | Planned |
+| prayer | "代禱", postback `action=prayer` | Planned |
+| staff | "同工", postback `action=staff` | Planned |
+| promotion | Admin broadcast | Planned |
+| songs | "詩歌", postback `action=songs` | Planned |
 
 ## License
 
-This library is for internal LSC worship team use. Individual song copyrights belong to their respective owners.
+Internal use for Living Stone Church.
