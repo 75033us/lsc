@@ -30,6 +30,7 @@
     "dotenv": "^17.4.0",
     "express": "^5.2.1",
     "pinyin-pro": "^3.27.0",
+    "playwright": "^1.59.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

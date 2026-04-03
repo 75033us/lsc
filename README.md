@@ -10,7 +10,7 @@ A church admin automation platform handling announcements, scheduling, small gro
 
 - **Node.js** >= 18
 - **LINE Official Account** with Messaging API enabled
-- **ngrok** (for local development)
+- **cloudflared** (for local development) — `brew install cloudflared`
 
 ### 1. Install dependencies
 
@@ -33,37 +33,43 @@ PORT=3000
 ```
 
 To get these values:
-1. Go to [LINE Developers Console](https://developers.line.biz/console/)
+1. Go to [LINE Developers Console](https://local-developers.line.biz/console/)
 2. Create a **Provider** (or use existing)
 3. Create a **Messaging API** channel
 4. Under **Basic settings** → copy **Channel secret**
 5. Under **Messaging API** → issue and copy **Channel access token (long-lived)**
 
-### 3. Start the development server
+### 3. Local development
+
+Use the Claude Code skill to start everything at once:
+
+```
+/local-dev
+```
+
+This starts the dev server + cloudflared tunnel and gives you the webhook URL.
+
+**Or manually:**
 
 ```bash
+# Terminal 1: start dev server (hot reload)
 npm run dev
+
+# Terminal 2: expose via cloudflared tunnel
+cloudflared tunnel --url http://localhost:3000
 ```
 
-### 4. Expose webhook via ngrok
-
-In a separate terminal:
-
-```bash
-ngrok http 3000
-```
-
-Copy the `https://xxxx.ngrok-free.app` URL.
-
-### 5. Set webhook URL in LINE
+### 4. Set webhook URL in LINE (first time only)
 
 1. Go to LINE Developers Console → your channel → **Messaging API** tab
-2. Set **Webhook URL** to: `https://xxxx.ngrok-free.app/webhook`
+2. Set **Webhook URL** to: `https://xxxx.trycloudflare.com/webhook`
 3. Click **Verify** — should show success
 4. Enable **Use webhook**
 5. Disable **Auto-reply messages** in LINE Official Account Manager (under Response settings)
 
-### 6. Test it
+> **Note:** The cloudflared URL changes each restart. Update the webhook URL in LINE Developers Console each time, or set up a named tunnel with a Cloudflare account for a stable domain.
+
+### 5. Test it
 
 Open your LINE app, add the bot as a friend (via QR code from LINE Developers Console), and send:
 
