@@ -51,6 +51,8 @@
         "pinyin": "mí què yǒng yuǎn bù",
         "english": "And You never do"
       },
+    ],
+    "C": [
       {
         "chinese": "我高舉我雙手",
         "pinyin": "wǒ gāo jǔ wǒ shuāng shǒu",
@@ -64,8 +66,15 @@
       {
         "chinese": "",
         "pinyin": "",
+        "english": "Cause all that I have is a hallelujah"
+      },
+      {
+        "chinese": "",
+        "pinyin": "",
         "english": "Hallelujah"
       },
+    ],
+    "V2": [
       {
         "chinese": "雖然這並不夠",
         "pinyin": "suī rán zhè bìng bú gòu",
