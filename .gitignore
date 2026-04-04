@@ -5,3 +5,4 @@ dist/
 .DS_Store
 output/
 app/warranty/config.json
+*.pdf
