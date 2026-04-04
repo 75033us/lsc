@@ -10,7 +10,7 @@ Instruction to CLAUDE: For every session, please insert a session summary in thi
 - [README.md](README.md) - Project overview, schema, and usage
 
 ### Development Tasks
-- [task_000_design.md](dev/task_000_design.md) - Design decisions and rationale
+- [task_000_design_worship_lyrics_library.md](dev/task_000_design_worship_lyrics_library.md) - Design decisions and rationale
 - [task_001_song_schema.md](dev/task_001_song_schema.md) - Song JSON schema & validation
 - [task_002_slide_generator.md](dev/task_002_slide_generator.md) - Slide generation with PPTX export
 - [task_003_cli_tool.md](dev/task_003_cli_tool.md) - CLI tool implementation
