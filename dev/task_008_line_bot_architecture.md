@@ -3,7 +3,7 @@
 ## Status: Active
 
 ## Description
-Repurpose the LSC repo into a LINE Official Account bot for Living Stone Church (台灣學園傳道會). The bot serves as the church's admin automation platform — handling promotion, scheduling, newcomer info, small groups, events, registration, giving, prayer requests, staff directory, and general Q&A.
+Repurpose the LSC repo into a LINE Official Account bot for Living Spring Church (活泉靈糧堂). The bot serves as the church's admin automation platform — handling promotion, scheduling, newcomer info, small groups, events, registration, giving, prayer requests, staff directory, and general Q&A.
 
 The lyrics/slide generation work has moved to `lsc-pptx` (Python, separate repo).
 

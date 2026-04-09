@@ -1,6 +1,6 @@
 # LSC LINE Bot
 
-LINE Official Account bot for Living Stone Church (活石靈糧堂 / 台灣學園傳道會).
+LINE Official Account bot for Living Spring Church (活泉靈糧堂).
 
 A church admin automation platform handling announcements, scheduling, small groups, events, registration, giving, prayer requests, staff directory, and more — all through LINE.
 
@@ -150,4 +150,4 @@ Modules are registered in priority order in `src/index.ts`. First match wins.
 
 ## License
 
-Internal use for Living Stone Church.
+Internal use for Living Spring Church.

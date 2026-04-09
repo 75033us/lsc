@@ -1,11 +1,10 @@
 {
   "name": {
-    "chinese": "活石靈糧堂",
-    "english": "Living Stone Church"
+    "chinese": "活泉靈糧堂",
+    "english": "Living Spring Church"
   },
-  "organization": "台灣學園傳道會",
   "address": "台北市中正區...",
-  "mapUrl": "https://maps.google.com/?q=活石靈糧堂",
+  "mapUrl": "https://maps.google.com/?q=活泉靈糧堂",
   "services": [
     {
       "name": "主日崇拜",
