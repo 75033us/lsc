@@ -4,5 +4,8 @@ dist/
 *.db
 .DS_Store
 output/
+input/
+data/pushpay-sanitized/
+data/donor-reports/pii/
 app/warranty/config.json
 *.pdf
