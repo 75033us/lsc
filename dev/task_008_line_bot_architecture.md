@@ -16,7 +16,7 @@ The lyrics/slide generation work has moved to `lsc-pptx` (Python, separate repo)
 - **HTTP Server**: Express
 - **Database**: SQLite via `better-sqlite3` (upgrade to PostgreSQL later if needed)
 - **Config**: `dotenv`
-- **Deployment**: Google Cloud Run (free tier, auto-HTTPS)
+- **Deployment**: Cloudflare Workers + D1 (free tier; unified with `lsc.church` on Cloudflare Pages). See `task_014_cloudflare_deployment.md` for the full migration plan.
 
 ---
 
@@ -153,18 +153,18 @@ Songs remain as JSON files in `songs/` — no DB migration needed.
 
 ## Phased Implementation
 
-### Phase 1 — Foundation ← CURRENT
+### Phase 1 — Foundation ✅ COMPLETE
 - [x] Update package.json (swap deps)
 - [x] Update .gitignore
-- [ ] Express + @line/bot-sdk webhook server
-- [ ] Event router with module dispatch
-- [ ] `info` module (static church data)
-- [ ] `qa` module (FAQ from JSON)
-- [ ] Rich menu setup script
-- [ ] .env config
+- [x] Express + @line/bot-sdk webhook server (`src/server.ts`, `src/line/webhook.ts`)
+- [x] Event router with module dispatch (`src/line/webhook.ts`, `src/modules/types.ts`)
+- [x] `info` module (static church data) (`src/modules/info/handler.ts`)
+- [x] `qa` module (FAQ from JSON) (`src/modules/qa/handler.ts`)
+- [x] Rich menu setup script (`scripts/setup-rich-menu.ts`)
+- [x] .env config (`src/config.ts` + `.env.example`)
 
-### Phase 2 — Core Features
-- [ ] SQLite schema + migration
+### Phase 2 — Core Features ← CURRENT
+- [ ] SQLite schema + migration (`src/db/` exists but empty; `scripts/migrate.ts` referenced in `package.json` but file not yet written)
 - [ ] `registration` module (multi-step conversation)
 - [ ] `prayer` module (submit + notify pastors)
 - [ ] `giving` module (static links)
@@ -190,17 +190,26 @@ Songs remain as JSON files in `songs/` — no DB migration needed.
 
 ## Deployment
 
-- **Dev**: `npm run dev` + ngrok for webhook tunnel
-- **Prod**: Google Cloud Run (free tier, auto-HTTPS)
-- **Database**: SQLite file on persistent volume; upgrade to PostgreSQL if needed later
+See `task_014_cloudflare_deployment.md` for the full Workers + D1 migration plan.
+
+- **Dev**: `wrangler dev` (local) / `wrangler dev --remote` (public preview URL for LINE webhook testing)
+- **Prod**: Cloudflare Workers + D1 (free tier; same Cloudflare account as `lsc.church`)
+- **Database**: D1 (serverless SQLite, same dialect as `better-sqlite3`)
 
 ## Environment Variables
 
+Set as Workers secrets via `wrangler secret put`:
+
 ```
-LINE_CHANNEL_ACCESS_TOKEN=
-LINE_CHANNEL_SECRET=
-PORT=3000
-DATABASE_URL=./data/lsc.db
-NODE_ENV=production
-ADMIN_LINE_USER_IDS=  # comma-separated
+LINE_CHANNEL_ACCESS_TOKEN
+LINE_CHANNEL_SECRET
+ADMIN_LINE_USER_IDS    # comma-separated
 ```
+
+Non-secret config in `wrangler.toml` `[vars]`:
+
+```
+NODE_ENV = "production"
+```
+
+D1 binding is named `DB` (declared in `wrangler.toml`, not env). `PORT` and file-based `DATABASE_URL` no longer apply on Workers.

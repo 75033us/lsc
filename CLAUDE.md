@@ -8,6 +8,8 @@ Instruction to CLAUDE: For every session, please insert a session summary in thi
 
 ### Documentation
 - [README.md](README.md) - Project overview, schema, and usage
+- [data/copyright/README.md](data/copyright/README.md) - Music licensing posture (CCLI Copyright, SOP, Joshua Band, ROLCC) and on-screen attribution rules
+- [data/copyright/worship-leader-guide.md](data/copyright/worship-leader-guide.md) - 5-minute worship leader guide: which songs are OK live vs. streaming, slide attribution, CCLI reporting
 
 ### Development Tasks
 - [task_000_design_worship_lyrics_library.md](dev/task_000_design_worship_lyrics_library.md) - Design decisions and rationale
@@ -22,5 +24,6 @@ Instruction to CLAUDE: For every session, please insert a session summary in thi
 - [task_011_donor_frequency_report.md](dev/task_011_donor_frequency_report.md) - Pushpay-derived donor engagement report — frequency only, no amounts
 - [task_012_pii_handling.md](dev/task_012_pii_handling.md) - "Good enough" PII handling baseline for a small church (<20 families)
 - [task_013_pa_sop.md](dev/task_013_pa_sop.md) - PA (A/V production) SOP + 6-class volunteer training curriculum
+- [task_014_cloudflare_deployment.md](dev/task_014_cloudflare_deployment.md) - LINE bot deployment plan: Cloudflare Workers + D1 (replaces Cloud Run)
 
 ---
