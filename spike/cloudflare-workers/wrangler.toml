@@ -1,0 +1,10 @@
+name = "lsc-bot-spike"
+main = "src/worker.ts"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# No D1 / KV bindings in the spike. Just want to know if
+# @line/bot-sdk + signature verification works under Workers.
+
+[vars]
+ENV = "spike"

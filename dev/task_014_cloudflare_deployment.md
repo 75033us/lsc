@@ -1,6 +1,6 @@
 # Task 014: Cloudflare Workers Deployment — Migration Plan
 
-## Status: Draft — pending user decision before implementation
+## Status: Phase 0 ✅ — ready for Phase 1 (skeleton port)
 
 ## Why Cloudflare Workers (not Cloud Run)
 
@@ -137,13 +137,13 @@ For repeated dev: `wrangler d1 execute lsc-bot --local --file=...` against the l
 
 ---
 
-## Compatibility unknowns (verify in Phase 0)
+## Compatibility verified in Phase 0
 
-### `@line/bot-sdk` on Workers — risk: medium
+### `@line/bot-sdk` on Workers — ✅ confirmed working
 
-The official SDK depends on `axios` + `form-data` + some Node streams. Workers' `nodejs_compat` flag handles much of this, but corner cases (file upload helpers, signed URL utilities) may break.
+`@line/bot-sdk@10.6.0` loads cleanly under `nodejs_compat`. `validateSignature()` and `messagingApi.MessagingApiClient` constructor both work. File-upload helpers were not tested (we don't use them yet) — verify if/when we need image upload to LINE.
 
-**Mitigation**: Phase 0 is a one-hour spike — try loading `@line/bot-sdk` in a minimal Worker with `nodejs_compat`. If signature verification + `client.replyMessage` work, ship. If not, write a thin custom client (≤80 lines):
+Original concern (kept for context): the SDK depends on `axios` + `form-data` + some Node streams. None of that surfaced as a problem in the spike. Fallback hand-rolled client below is no longer needed but kept for reference in case future SDK upgrades break compatibility:
 
 ```typescript
 // fallback shape if SDK is incompatible
@@ -222,10 +222,16 @@ Future: GitHub Action that runs `wrangler deploy` on push to `main`. Defer until
 
 ## Migration phases
 
-### Phase 0 — Compatibility spike (1 hour)
-- [ ] Create throwaway Worker, install `@line/bot-sdk` with `nodejs_compat`
-- [ ] Verify signature validation + a single reply message work
-- [ ] **Decision gate**: if SDK works → keep it. If not → plan hand-rolled client (~80 lines)
+### Phase 0 — Compatibility spike ✅ DONE (2026-05-14)
+- [x] Created throwaway Worker at `spike/cloudflare-workers/` (wrangler 4.91.0, nodejs_compat flag)
+- [x] `@line/bot-sdk@10.6.0` imports under workerd — `messagingApi.MessagingApiClient`, `validateSignature`, `webhook.Event` types all resolve
+- [x] Signature verification: HMAC-SHA256 via `validateSignature()` correctly accepts valid sig and rejects bad sig (verified with `curl -X POST` + openssl-computed HMAC)
+- [x] Webhook routing via Hono works — `/` and `/webhook` both respond as expected
+- [x] **Decision**: keep `@line/bot-sdk`. No hand-rolled fallback needed for signature + reply. `client.replyMessage` was not tested against a real LINE channel (would need real access token), but the SDK loads + the type signature matches, so confidence is high. Test live in Phase 1 when we point a real channel at `wrangler dev --remote`.
+
+**Spike artifacts**: `spike/cloudflare-workers/wrangler.toml`, `src/worker.ts`, `tsconfig.json`. Keep as smoke test until Phase 1 ports the real bot; can delete after Phase 1 ships.
+
+**Compat note**: had to import `webhook.Event` not `WebhookEvent` (top-level export name in v10 SDK is `webhook` namespace, not the older `WebhookEvent` symbol).
 
 ### Phase 1 — Skeleton on Workers (3–4 hours)
 - [ ] `wrangler.toml`, `tsconfig.json` updated, install Hono + wrangler
